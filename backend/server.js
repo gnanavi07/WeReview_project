@@ -462,16 +462,19 @@ app.post('/api/reviews/predict', async (req, res) => {
       duplicateCount = 0;
     }
 
-    // If the same user has already reviewed this product, it is review duplication/spam!
+   
+    // Flag repeat reviews separately; do not override the AI prediction.
     if (duplicateCount > 0) {
-      console.log(`[SPAM DETECTION] Reviewer ${reviewerId} has already submitted ${duplicateCount} reviews for product ${asin}. Tagging as FAKE spam.`);
-      data.prediction = 'fake';
-      data.fake_probability = Math.max(0.85, Number(data.fake_probability));
-      data.genuine_probability = Number((1.0 - data.fake_probability).toFixed(4));
+      console.log(
+        `[DUPLICATE REVIEW] Reviewer ${reviewerId} has ` +
+        `already submitted ${duplicateCount} review(s) for product ${asin}.`
+      );
       if (!data.details) data.details = {};
-      data.details.duplicate_review_spam = true;
+
+      data.details.duplicate_review = true;
       data.details.prior_reviews_for_product = duplicateCount;
     }
+
 
     // 7. Save to MySQL database (reviews table)
     let savedRecord = null;

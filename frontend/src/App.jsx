@@ -10,7 +10,7 @@ import AboutUs from './pages/AboutUs'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import './index.css'
-
+import Cart from './pages/Cart'
 function App() {
   return (
     <AuthProvider>
@@ -26,6 +26,7 @@ function App() {
               <Route path="/about" element={<AboutUs />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/cart" element={<Cart />} />
             </Routes>
           </main>
           <Footer />

@@ -54,12 +54,24 @@ export default function Navbar() {
 
         {/* Right Section: Auth & Actions */}
         <div className="ml-auto flex items-center gap-3">
-          <button className="text-gray-600 hover:text-purple-600 transition-colors p-1" aria-label="Favorites">
-            <Heart size={18} />
-          </button>
-          <button className="text-gray-600 hover:text-purple-600 transition-colors p-1" aria-label="Cart">
-            <ShoppingCart size={18} />
-          </button>
+          
+<button
+  onClick={() => navigate('/favorites')}
+  className="text-gray-600 hover:text-purple-600 transition-colors p-1 cursor-pointer"
+  aria-label="Favorites"
+  title="Favorites"
+>
+  <Heart size={18} />
+</button>
+
+<button
+  onClick={() => navigate('/cart')}
+  className="text-gray-600 hover:text-purple-600 transition-colors p-1 cursor-pointer"
+  aria-label="Cart"
+  title="Cart"
+>
+  <ShoppingCart size={18} />
+</button>
 
           {/* Auth State Links */}
           <div className="hidden md:flex items-center gap-2 pl-2 border-l border-gray-200">
